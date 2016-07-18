@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+monit:
+  pkg: monit
+  pkgname: 'monit.rpm'
+  pkgpath: '/usr/bin/monit' 
+  config: '/etc/monit/monitrc1'
+  logrotate: monit-logrotate.jinja
+  initscript: monit-init.jinja
+  directory:  [ '/etc/monit','/var/log/monit','/var/lib/monit']
+  service:
+    name: monit
+  configu:
+      - '/etc/monit'
+      - '/var/log/monit'
+      - '/tmp/sriman'
