@@ -3,7 +3,10 @@
 
 {% from "monit/map.jinja" import monit with context %}
 
-{% for directory in salt['pillar.get']('monit:configu',[]) %}
+{%- set monitdict = monit['configu'] %}
+
+
+{% for directory in monitdict  %}
 {{ directory }}:
    file.directory
 {% endfor %}

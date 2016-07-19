@@ -1,0 +1,8 @@
+{% from "monit/map.jinja" import monit with context %}
+
+{% set monithost = monit['checks'] %}
+
+{% for dictitem in monithost.items() %}
+check host {{ dictitem[0] }} with address {{ dictitem[1]['address'] }} 
+  if failed port 80 protocol {{ dictitem[1]['service'] | default('http') }} with timeout {{ dictitem[1]['timeout'] | default('15') }} seconds then alert
+{% endfor %}
