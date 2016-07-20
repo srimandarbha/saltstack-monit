@@ -3,10 +3,21 @@
 
 {% from "monit/map.jinja" import monit with context %}
 
-monit-config:
+{%- set monitdict = monit['configu'] %}
+{%- set monitconfigs = monit['config_files'] %}
+
+{% for directory in monitdict  %}
+{{ directory }}:
+   file.directory
+{% endfor %}
+
+{% for conf_filename,conf_filepath in monitconfigs.items() %}
+{{ conf_filename }}:
   file.managed:
-    - name: {{ monit.config }}
-    - source: salt://monit/files/monitrc.jinja
+    - name: {{ conf_filepath }}
+    - source: salt://monit/files/{{ conf_filename }}.jinja
     - mode: 700
     - user: root
     - group: root
+    - template: jinja
+{% endfor %}

@@ -4,6 +4,7 @@ monit:
   pkg: monit
   pkgname: 'monit.rpm'
   pkgpath: '/usr/bin/monit' 
+  monit-install: '/'
   config: '/etc/monit/monitrc'
   logrotate: monit-logrotate.jinja
   initscript: monit-init.jinja
@@ -13,7 +14,11 @@ monit:
       - '/etc/monit'
       - '/etc/monit/conf.d'
       - '/var/log/monit'
-      - '/tmp/sriman'
   checks:
-      host1: { 'address': 'http://54.169.170.122', 'port': 80, 'service': 'http' }
-      host2: { 'address': 'http://scanme.nmap.org', 'port': 80, 'timeout': 15, 'service': 'http' }
+      host1: { 'address': '54.169.170.122', 'port': 80, 'service': 'http' }
+      host2: { 'address': 'scanme.nmap.org', 'port': 80, 'timeout': 15, 'service': 'http' }
+      host3: { 'address': 'www.greatandhra.com', 'port': 80, 'timeout': 20, 'service': 'http'}
+  config_files: 
+     monit_init: '/etc/init.d/monit'
+     monit_logrotate: '/etc/logrotate.d/monit'
+     monit_config: '/etc/monit/monitrc'

@@ -3,14 +3,6 @@
 
 {% from "monit/map.jinja" import monit with context %}
 
-{%- set monitdict = monit['configu'] %}
-
-
-{% for directory in monitdict  %}
-{{ directory }}:
-   file.directory
-{% endfor %}
-
 monit-pkg:
   file.managed:
     - name: '/tmp/{{ monit.pkgname }}'
