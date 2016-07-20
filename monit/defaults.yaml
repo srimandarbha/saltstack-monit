@@ -22,3 +22,4 @@ monit:
      monit_init: '/etc/init.d/monit'
      monit_logrotate: '/etc/logrotate.d/monit'
      monit_config: '/etc/monit/monitrc'
+     customchecks: '/etc/monit/conf.d/customchecks'

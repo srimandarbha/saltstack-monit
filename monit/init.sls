@@ -6,6 +6,5 @@
 include:
   - monit.install
   - monit.config
-  - monit.template
   - monit.service
 {% endif %}
