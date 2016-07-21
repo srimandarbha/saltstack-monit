@@ -1,6 +1,6 @@
 {% from "monit/map.jinja" import monit with context %}
 {% set monithost = monit['checks'] %}
-{%- for dictitem in monithost.items() -%}
+{%- for dictitem in monithost.items() %}
 check host {{ dictitem[0] }} with address {{ dictitem[1]['address'] }} 
   if failed 
      port {{ dictitem[1]['port'] }} 
@@ -8,7 +8,7 @@ check host {{ dictitem[0] }} with address {{ dictitem[1]['address'] }}
      protocol {{ dictitem[1]['service'] | default('http') }} 
      timeout {{ dictitem[1]['timeout'] | default('15') }} seconds 
   then alert
-{% if monit.email %}
+{% if monit.email -%}
   alert {{ monit.email }} with reminder on 5 cycles
-{% endif %}
+{%- endif %}
 {% endfor -%}
