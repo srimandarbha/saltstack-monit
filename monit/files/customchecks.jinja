@@ -1,5 +1,5 @@
-{% from "monit/map.jinja" import monit with context %}
-{% set monithost = monit['checks'] %}
+# looping for populating customchecks file
+{% set monithost = salt['pillar.get']('monit_host') %}
 {%- for dictitem in monithost.items() %}
 check host {{ dictitem[0] }} with address {{ dictitem[1]['address'] }} 
   if failed 
@@ -12,3 +12,4 @@ check host {{ dictitem[0] }} with address {{ dictitem[1]['address'] }}
   alert {{ monit.email }} with reminder on 5 cycles
 {%- endif %}
 {% endfor -%}
+{% endif %}
